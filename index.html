@@ -190,8 +190,8 @@
                         and win and wp forum coffee mug!</p>
 
                     <label class="flex gap-1 flex-col lg:inline-block rounded-[50px] input">
-                        <input type="text" class="px-2 py-3" placeholder="Search here anything" />
-                        <button
+                        <input id="search" type="text" class="px-2 py-3" placeholder="Search here anything" />
+                        <button onclick="searchHandle()"
                             class="rounded-[24px] lg:rounded-[46px] text-white bg-[#797DFC] py-2 lg:px-10 lg:py-[11px] lg:text-[20px] font-semibold lg:font-bold ">Search</button>
                     </label>
 
@@ -228,6 +228,9 @@
                 <h1 class="font-black text-[40px] text-[#12132D]">Let's Discuss</h1>
                 <p class="p-color text-[18px] pt-6">Yes, you can run unit tests and view the results directly within the app. The <br> integrated testing features allow for a streamlined .</p>
             </div>
+            <div id="loading" class="text-center hidden mt-20">
+                <span class="loading loading-dots loading-lg"></span>
+              </div>
 
             <!-- main part -->
             <div  class="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-[48px]">
