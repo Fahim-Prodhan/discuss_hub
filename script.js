@@ -149,7 +149,6 @@ const loadLatestPosts = async () => {
   const data = await res.json();
   const allLatestPosts = data;
   showAllLatestPosts(allLatestPosts);
-  console.log(allLatestPosts);
 };
 
 function showAllLatestPosts(allLatestPosts) {
