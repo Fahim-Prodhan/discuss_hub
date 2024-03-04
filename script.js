@@ -10,31 +10,33 @@ const loadAllForum = async (
 
 const showAllPosts = (allPosts) => {
   const allPostContainer = document.getElementById("all-post-container");
-  const markReadContainer = document.getElementById('mark-read-container')
-  markReadContainer.classList.add('hidden')
+  const markReadContainer = document.getElementById("mark-read-container");
+  markReadContainer.classList.add("hidden");
   allPostContainer.textContent = "";
   loaderHandler(true);
-    setTimeout(()=>{
-        for (const post of allPosts) {
-            const postCard = document.createElement("div");
-        
-            const avatarContainerClass = post.isActive ? "bg-green-400" : "bg-red-500";
-        
-            postCard.innerHTML = `
+  setTimeout(() => {
+    for (const post of allPosts) {
+      const postCard = document.createElement("div");
+
+      const avatarContainerClass = post.isActive
+        ? "bg-green-400"
+        : "bg-red-500";
+
+      postCard.innerHTML = `
                     <!-- left side -->
-                    <div class="p-10 bg-[#797dfc1a] rounded-3xl grid grid-cols-1 lg:grid-cols-11 gap-6">
+                    <div class="p-10 bg-[#797dfc1a] rounded-3xl grid grid-cols-1 lg:grid-cols-11 lg:gap-6">
                     <!-- avatar part -->
                     <div class="col-span-2">
                         <div class="relative">
-                            <img class="w-20 h-20 rounded-xl" src="${
+                            <img class="lg:w-20 h-16 lg:h-20 rounded-xl" src="${
                               post.image
                             }" alt="">
-                            <span class="${avatarContainerClass} absolute top-1 left-[68px] transform -translate-y-1/2 w-3.5 h-3.5 border-2 border-white dark:border-gray-800 rounded-full"></span>
+                            <span class="${avatarContainerClass} absolute top-1 left-14 lg:left-[68px] transform -translate-y-1/2 w-3.5 h-3.5 border-2 border-white dark:border-gray-800 rounded-full"></span>
                         </div>
                     </div>
                     <!-- other's part -->
                     <div class="col-span-9">
-                        <div class="flex flex-col lg:flex-row gap-5">
+                        <div class="flex flex-col lg:flex-row lg:gap-5">
                             <p class=" p-color font-medium text-[14px]">#${
                               post.category
                             }</p>
@@ -78,19 +80,19 @@ const showAllPosts = (allPosts) => {
                                     <button onClick="getReadInfo('${escape(
                                       post.title
                                     )}','${
-              post.view_count
-            }')"><img src="images/email 1.svg" alt=""></button>
+        post.view_count
+      }')"><img src="images/email 1.svg" alt=""></button>
                                 </div>
                             </div>
                         </div>
                     </div>
                     </div>
                 `;
-            allPostContainer.appendChild(postCard);
-          }
-            loaderHandler(false);
-            markReadContainer.classList.remove('hidden')
-    },2000)
+      allPostContainer.appendChild(postCard);
+    }
+    loaderHandler(false);
+    markReadContainer.classList.remove("hidden");
+  }, 2000);
 };
 
 let clickCount = 0;
@@ -133,50 +135,79 @@ const loaderHandler = (isLoading) => {
     loading.classList.add("hidden");
   }
 };
+const loaderHandler2 = (isLoading) => {
+  const loading = document.getElementById("loading1");
+  if (isLoading) {
+    loading.classList.remove("hidden");
+  } else {
+    loading.classList.add("hidden");
+  }
+};
 
-const loadLatestPosts = async()=>{
-  const res = await fetch('https://openapi.programming-hero.com/api/retro-forum/latest-posts')
+const loadLatestPosts = async () => {
+  const res = await fetch(
+    "https://openapi.programming-hero.com/api/retro-forum/latest-posts"
+  );
   const data = await res.json();
-  const allLatestPosts = data
-  showAllLatestPosts(allLatestPosts)
+  const allLatestPosts = data;
+  showAllLatestPosts(allLatestPosts);
   console.log(allLatestPosts);
-}
+};
 
-function showAllLatestPosts (allLatestPosts){
-    const latestPostContainer = document.getElementById('latest-post-container')
+function showAllLatestPosts(allLatestPosts) {
+  const latestPostContainer = document.getElementById("latest-post-container");
 
-    allLatestPosts.forEach((post)=>{
-      const postCard = document.createElement('div')
+  latestPostContainer.textContent = "";
+  loaderHandler2(true);
+  
+  setTimeout(()=>{
+    allLatestPosts.forEach((post) => {
+      const postCard = document.createElement("div");
       postCard.innerHTML = `
-          <div class="card w-96 h-[500px] bg-base-100 shadow-xl p-6">
-          <figure><img src="${post.cover_image}" alt="Shoes" /></figure>
-          <div class="flex gap-4 mt-6 mb-4">
-              <img src="images/calendar.svg" alt="">
-              <p class="p-color">${post.author.posted_date ? post.author.posted_date: "No publish date" }</p>
+            <div class="card h-[500px] bg-base-100 shadow-xl p-6">
+            <figure><img src="${post.cover_image}" alt="Shoes" /></figure>
+            <div class="flex gap-4 mt-6 mb-4">
+                <img src="images/calendar.svg" alt="">
+                <p class="p-color">${
+                  post.author.posted_date
+                    ? post.author.posted_date
+                    : "No publish date"
+                }</p>
+            </div>
+            <div class="mb-3">
+                <h1 class="text-[#12132D] font-extrabold text-[18px]">${
+                  post.title
+                }</h1>
+            </div>
+            <div class="mb-4">
+                <p class="p-color">${post.description}</p>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="avatar">
+                    <div class="w-12 rounded-full">
+                      <img src="${post.profile_image}" />
+                    </div>
+                </div>
+                <div>
+                    <h1 class="text-[#12132D] font-bold">${post.author.name}</h1>
+                    <p class="p-color text-[14px]">${
+                      post.author.designation
+                        ? post.author.designation
+                        : "unknown"
+                    }</p>
+                </div>
+            </div>
           </div>
-          <div class="mb-3">
-              <h1 class="text-[#12132D] font-extrabold text-[18px]">${post.title}</h1>
-          </div>
-          <div class="mb-4">
-              <p class="p-color">${post.description}</p>
-          </div>
-          <div class="flex items-center gap-4">
-              <div class="avatar">
-                  <div class="w-12 rounded-full">
-                    <img src="${post.profile_image}" />
-                  </div>
-              </div>
-              <div>
-                  <h1 class="text-[#12132D] font-bold">${post.author.name}</h1>
-                  <p class="p-color text-[14px]">${post.author.designation ? post.author.designation:'unknown' }</p>
-              </div>
-          </div>
-        </div>
-      `
-      latestPostContainer.appendChild(postCard)
-    })
+        `;
+      
+        latestPostContainer.appendChild(postCard);
+    });
+    loaderHandler2(false);
+  },2000)
+  
+
 }
 
 loadAllForum();
 
-loadLatestPosts()
+loadLatestPosts();
