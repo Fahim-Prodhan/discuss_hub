@@ -24,7 +24,7 @@ const showAllPosts = (allPosts) => {
 
       postCard.innerHTML = `
                     <!-- left side -->
-                    <div class="p-10 bg-[#797dfc1a] rounded-3xl grid grid-cols-1 lg:grid-cols-11 lg:gap-6">
+                    <div class="p-10 bg-[#797dfc1a] rounded-3xl grid grid-cols-1 lg:grid-cols-12 gap-4">
                     <!-- avatar part -->
                     <div class="col-span-2">
                         <div class="relative">
@@ -35,7 +35,7 @@ const showAllPosts = (allPosts) => {
                         </div>
                     </div>
                     <!-- other's part -->
-                    <div class="col-span-9">
+                    <div class="col-span-10">
                         <div class="flex flex-col lg:flex-row lg:gap-5">
                             <p class=" p-color font-medium text-[14px]">#${
                               post.category
@@ -56,7 +56,7 @@ const showAllPosts = (allPosts) => {
         
                             
                             <div class="flex flex-col lg:flex-row gap-4 justify-between  mt-5 ">
-                                <div class="flex flex-col lg:flex-row gap-4 lg:gap-7">
+                                <div class="flex  lg:flex-row gap-4 lg:gap-7">
                                     <div class="flex gap-4">
                                         <p><img src="images/tabler-icon-message-2.svg" alt=""></p>
                                         <p class="text-[16px] p-color">${
@@ -73,15 +73,13 @@ const showAllPosts = (allPosts) => {
                                         <p><img src="images/tabler-icon-clock-hour-9.svg" alt=""></p>
                                         <p class="text-[16px] p-color">${
                                           post.posted_time
-                                        }</p>
+                                        } min</p>
                                     </div>
                                 </div>
                                 <div>
                                     <button onClick="getReadInfo('${escape(
                                       post.title
-                                    )}','${
-        post.view_count
-      }')"><img src="images/email 1.svg" alt=""></button>
+                                    )}','${post.view_count}')"><img src="images/email 1.svg" alt=""></button>
                                 </div>
                             </div>
                         </div>
