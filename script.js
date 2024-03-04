@@ -57,19 +57,19 @@ const showAllPosts = (allPosts) => {
                             
                             <div class="flex flex-col lg:flex-row gap-4 justify-between  mt-5 ">
                                 <div class="flex  lg:flex-row gap-4 lg:gap-7">
-                                    <div class="flex gap-4">
+                                    <div class="flex gap-2 lg:gap-4">
                                         <p><img src="images/tabler-icon-message-2.svg" alt=""></p>
                                         <p class="text-[16px] p-color">${
                                           post.comment_count
                                         }</p>
                                     </div>
-                                    <div class="flex gap-4">
+                                    <div class="flex gap-2 lg:gap-4">
                                         <p><img src="images/tabler-icon-eye.svg" alt=""></p>
                                         <p class="text-[16px] p-color">${
                                           post.view_count
                                         }</p>
                                     </div>
-                                    <div class="flex gap-4">
+                                    <div class="flex gap-2 lg:gap-4">
                                         <p><img src="images/tabler-icon-clock-hour-9.svg" alt=""></p>
                                         <p class="text-[16px] p-color">${
                                           post.posted_time
