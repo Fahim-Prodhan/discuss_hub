@@ -5,6 +5,7 @@ const loadAllForum = async (
   const data = await res.json();
   const allPosts = data.posts;
   showAllPosts(allPosts);
+  // console.log(allPosts);
 };
 
 const showAllPosts = (allPosts) => {
@@ -28,7 +29,7 @@ const showAllPosts = (allPosts) => {
                             <img class="w-20 h-20 rounded-xl" src="${
                               post.image
                             }" alt="">
-                            <span class="${avatarContainerClass} absolute top-1 left-16 transform -translate-y-1/2 w-3.5 h-3.5 border-2 border-white dark:border-gray-800 rounded-full"></span>
+                            <span class="${avatarContainerClass} absolute top-1 left-[68px] transform -translate-y-1/2 w-3.5 h-3.5 border-2 border-white dark:border-gray-800 rounded-full"></span>
                         </div>
                     </div>
                     <!-- other's part -->
@@ -133,4 +134,49 @@ const loaderHandler = (isLoading) => {
   }
 };
 
+const loadLatestPosts = async()=>{
+  const res = await fetch('https://openapi.programming-hero.com/api/retro-forum/latest-posts')
+  const data = await res.json();
+  const allLatestPosts = data
+  showAllLatestPosts(allLatestPosts)
+  console.log(allLatestPosts);
+}
+
+function showAllLatestPosts (allLatestPosts){
+    const latestPostContainer = document.getElementById('latest-post-container')
+
+    allLatestPosts.forEach((post)=>{
+      const postCard = document.createElement('div')
+      postCard.innerHTML = `
+          <div class="card w-96 h-[500px] bg-base-100 shadow-xl p-6">
+          <figure><img src="${post.cover_image}" alt="Shoes" /></figure>
+          <div class="flex gap-4 mt-6 mb-4">
+              <img src="images/calendar.svg" alt="">
+              <p class="p-color">${post.author.posted_date ? post.author.posted_date: "No publish date" }</p>
+          </div>
+          <div class="mb-3">
+              <h1 class="text-[#12132D] font-extrabold text-[18px]">${post.title}</h1>
+          </div>
+          <div class="mb-4">
+              <p class="p-color">${post.description}</p>
+          </div>
+          <div class="flex items-center gap-4">
+              <div class="avatar">
+                  <div class="w-12 rounded-full">
+                    <img src="${post.profile_image}" />
+                  </div>
+              </div>
+              <div>
+                  <h1 class="text-[#12132D] font-bold">${post.author.name}</h1>
+                  <p class="p-color text-[14px]">${post.author.designation ? post.author.designation:'unknown' }</p>
+              </div>
+          </div>
+        </div>
+      `
+      latestPostContainer.appendChild(postCard)
+    })
+}
+
 loadAllForum();
+
+loadLatestPosts()
